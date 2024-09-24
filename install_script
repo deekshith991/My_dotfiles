@@ -1,8 +1,8 @@
 
 
-sudo apt install curl stow git tmux 
-
-# birave
+sudo apt install 
+[ curl stow git tmux nodejs npm direnv bat zoxide gcc g++ ddefault-jdk default-jre lazygit python3 ubuntu-restricted-extras ]
+# brave
 
 #
 # sudo apt install curl
@@ -14,4 +14,4 @@ sudo apt install curl stow git tmux
 # sudo apt update
 #
 # sudo apt install brave-browser
-
+ sudo npm -g install create-react-app
