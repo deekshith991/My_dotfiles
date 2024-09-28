@@ -150,10 +150,26 @@ alias reload-zsh="source ~/.zshrc"
 alias edit-zsh="nvim ~/.zshrc"
 
 
+## service aliases 
+
+alias mongo-stop="systemctl stop mongod.service"
+alias mongo-start="systemctl start mongod.service"
+alias mongo-status="systemctl status mongod.service"
+
+## tmux aliases 
+
+alias tn="tmux -u new -s"
+alias ta="tmux attach-session -t"
+alias tkill="tmux kill-session -t"
+alias twkill="tmux kill-window -t"
+alias tls="tmux ls"
+
+
 # sourcing
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
+source <(fzf --zsh) # Set up fzf key bindings and fuzzy completion
 
 # Add any additional configurations here
 
