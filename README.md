@@ -44,7 +44,9 @@ If Nix is installed, the script installs the following Nix packages:
 
 ## Usage
 1. **Clone the repository:**
-   ```bash
+   ``` bash
    git clone <repository-url>
    cd <repository-directory>
+   ```
+
 
