@@ -45,8 +45,9 @@ If Nix is installed, the script installs the following Nix packages:
 ## Usage
 1. **Clone the repository:**
    ``` bash
-   git clone <repository-url>
-   cd <repository-directory>
+   git clone https://github.com/deekshith991/My_dotfiles
+   cd My_dotfiles
+   stow folder1 folder2 ....
    ```
 
 
