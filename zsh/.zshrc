@@ -140,6 +140,41 @@ export NVM_DIR="$HOME/.nvm"
 
 
 
+## trying proxy set up 
+
+# Proxy variables
+PROXY_ON=false
+PROXY_URL="http://staffnet.rgukt.ac.in:3128"
+
+# # Function to toggle proxy on
+proxy_on() {
+  export http_proxy=$PROXY_URL
+  export https_proxy=$PROXY_URL
+  export ftp_proxy=$PROXY_URL
+  export no_proxy="localhost,127.0.0.1"
+  PROXY_ON=true
+  echo "Proxy is now ON"
+}
+
+# # Function to toggle proxy off
+proxy_off() {
+  unset http_proxy
+  unset https_proxy
+  unset ftp_proxy
+  unset no_proxy
+  PROXY_ON=false
+  echo "Proxy is now OFF"
+}
+
+# # Function to toggle proxy state
+toggle_proxy() {
+  if [ "$PROXY_ON" = false ]; then
+    proxy_on
+  else
+    proxy_off
+  fi
+}
+
 # aliasing
 
 alias l="ls -la"
