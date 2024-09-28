@@ -139,11 +139,19 @@ unset key
 
 
 # aliasing
+
 alias l="ls -la"
+alias windows="cd /media/deekshith/0804797804796998/Users/Deekshith"
+alias cd="z"
+alias bat="batcat"
+alias reload-zsh="source ~/.zshrc"
+alias edit-zsh="nvim ~/.zshrc"
+
 
 # sourcing
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
+eval "$(zoxide init zsh)"
 
 # Add any additional configurations here
 
