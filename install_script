@@ -1,7 +1,7 @@
 
 
 sudo apt install 
-[ curl stow git tmux nodejs npm direnv bat zoxide gcc g++ ddefault-jdk default-jre lazygit python3 ubuntu-restricted-extras ]
+[ curl stow git tmux nodejs npm direnv bat zoxide gcc g++ default-jdk default-jre lazygit python3 ubuntu-restricted-extras ]
 # brave
 
 #
@@ -15,3 +15,7 @@ sudo apt install
 #
 # sudo apt install brave-browser
  sudo npm -g install create-react-app
+
+nix-env -iA nixpkgs.fzf
+nix-env -iA nixpkgs.age
+nix-env -iA nixpkgs.portal
