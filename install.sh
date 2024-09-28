@@ -26,6 +26,7 @@ install_apt_packages() {
   done
 
   read -p "Do you want to proceed with the installation of APT packages? (y/n): " confirm
+  echo # Add an empty line for better readability
   if [[ "$confirm" != "y" ]]; then
     log "APT package installation aborted."
     exit 0
@@ -37,8 +38,10 @@ install_apt_packages() {
     if dpkg -l | grep -q "$pkg"; then
       log "\033[1;33m$pkg is already installed.\033[0m"
     else
+      echo # Empty line before installation message
       log "Installing \033[1;32m$pkg\033[0m..."
       sudo apt install -y "$pkg" || log "Failed to install \033[1;31m$pkg\033[0m."
+      echo -e "\n\033[1;32m$pkg installed successfully!\033[0m\n" # Success message
     fi
   done
 }
@@ -47,6 +50,7 @@ install_apt_packages() {
 install_brave() {
   log "Preparing to install Brave Browser..."
   read -p "Do you want to proceed with the installation of Brave Browser? (y/n): " confirm_brave
+  echo # Add an empty line for better readability
   if [[ "$confirm_brave" != "y" ]]; then
     log "Brave Browser installation aborted."
     return
@@ -67,14 +71,24 @@ install_brave() {
   if dpkg -l | grep -q "brave-browser"; then
     log "Brave Browser is already installed."
   else
-    log "Installing Brave Browser..."
+    echo # Empty line before installation message
+    log "Installing \033[1;32mBrave Browser\033[0m..."
     sudo apt install -y brave-browser || log "Failed to install Brave Browser."
+    echo -e "\n\033[1;32mBrave Browser installed successfully!\033[0m\n" # Success message
   fi
 }
 
 # Function to check if Nix is installed
 check_nix() {
   command -v nix-env &>/dev/null
+}
+
+# Function to list installed Nix packages
+list_installed_nix_packages() {
+  log "Currently installed Nix packages:"
+  nix-env -q | while read pkg; do
+    echo -e "    - \033[1;32m$pkg\033[0m"
+  done
 }
 
 # Function to install Nix packages
@@ -87,6 +101,7 @@ install_nix_packages() {
   done
 
   read -p "Do you want to proceed with the installation of Nix packages? (y/n): " confirm_nix
+  echo # Add an empty line for better readability
   if [[ "$confirm_nix" != "y" ]]; then
     log "Nix package installation aborted."
     return
@@ -97,8 +112,10 @@ install_nix_packages() {
     if nix-env -q | grep -q "$pkg"; then
       log "\033[1;33m$pkg is already installed.\033[0m"
     else
+      echo # Empty line before installation message
       log "Installing \033[1;32m$pkg\033[0m..."
       nix-env -iA nixpkgs."$pkg" || log "Failed to install \033[1;31m$pkg\033[0m."
+      echo -e "\n\033[1;32m$pkg installed successfully!\033[0m\n" # Success message
     fi
   done
 }
@@ -109,7 +126,10 @@ install_create_react_app() {
   if npm list -g --depth=0 | grep -q create-react-app; then
     log "Create React App is already installed."
   else
+    echo # Empty line before installation message
+    log "Installing \033[1;32mCreate React App\033[0m..."
     sudo npm -g install create-react-app || log "Failed to install Create React App."
+    echo -e "\n\033[1;32mCreate React App installed successfully!\033[0m\n" # Success message
   fi
 }
 
@@ -138,13 +158,18 @@ install_apt_packages "${apt_packages[@]}"
 install_brave
 
 if check_nix; then
-  log "Nix is installed. Proceeding to install Nix packages..."
+  log "Nix is installed. Currently installed Nix packages will be listed:"
+  list_installed_nix_packages
+
+  echo # Empty line for better readability
+  log "Proceeding to install additional Nix packages..."
 
   # Define Nix packages
   nix_packages=(
     fzf
     age
     portal
+    atac
   )
 
   install_nix_packages "${nix_packages[@]}"
