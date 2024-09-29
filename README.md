@@ -47,7 +47,7 @@ If Nix is installed, the script installs the following Nix packages:
    ``` bash
    git clone https://github.com/deekshith991/My_dotfiles
    cd My_dotfiles
-   stow folder1 folder2 ....
+   stow config tmux zsh
    ```
 
 
