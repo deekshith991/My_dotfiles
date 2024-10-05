@@ -179,7 +179,7 @@ toggle_proxy() {
 
 alias l="ls -la"
 alias windows="cd /media/deekshith/0804797804796998/Users/Deekshith"
-alias cd="z"
+alias cd="z "
 alias cat="batcat"
 alias reload-zsh="source ~/.zshrc"
 alias edit-zsh="nvim ~/.zshrc"
@@ -190,6 +190,8 @@ alias edit-zsh="nvim ~/.zshrc"
 alias mongo-stop="systemctl stop mongod.service"
 alias mongo-start="systemctl start mongod.service"
 alias mongo-status="systemctl status mongod.service"
+
+alias aptU="sudo apt update && sudo apt upgrade"
 
 ## tmux aliases 
 
