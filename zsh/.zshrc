@@ -184,6 +184,11 @@ alias cat="batcat"
 alias reload-zsh="source ~/.zshrc"
 alias edit-zsh="nvim ~/.zshrc"
 
+## neovim
+alias nv="nvim"
+alias n="nvim -u $PWD/.vimrc"
+
+## alacritty
 
 ## service aliases 
 

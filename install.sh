@@ -152,6 +152,7 @@ apt_packages=(
   default-jre
   python3
   ubuntu-restricted-extras
+  kdeconnect
 )
 
 install_apt_packages "${apt_packages[@]}"
