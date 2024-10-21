@@ -10,6 +10,10 @@ family = "jetBrainsMono Nerd Font"
 
 [window]
 opacity = 0.80
+dimensions.columns = 80
+dimensions.lines = 24
+decorations = "full"
+title = "My Alacritty Terminal`"
 
 [window.padding]
 x = 10

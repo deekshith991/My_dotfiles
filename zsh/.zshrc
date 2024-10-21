@@ -224,5 +224,6 @@ fi
 # Running commands
 
 clear
+./launch_tmux.sh
 
 
