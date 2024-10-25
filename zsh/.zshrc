@@ -176,11 +176,17 @@ toggle_proxy() {
 }
 
 # aliasing
+alias l="ls"
+alias ll="ls -la"
 
-alias l="ls -la"
-alias windows="cd /media/deekshith/0804797804796998/Users/Deekshith"
 alias cd="z "
+alias cd.="cd ../"
+alias cd..="cd ../../"
+alias cd...="cd ../../../"
+alias cd....="cd ../../../../"
+
 alias cat="batcat"
+
 alias reload-zsh="source ~/.zshrc"
 alias edit-zsh="nvim ~/.zshrc"
 
@@ -191,7 +197,6 @@ alias n="nvim -u $PWD/.vimrc"
 ## alacritty
 
 ## service aliases 
-
 alias mongo-stop="systemctl stop mongod.service"
 alias mongo-start="systemctl start mongod.service"
 alias mongo-status="systemctl status mongod.service"
@@ -199,7 +204,6 @@ alias mongo-status="systemctl status mongod.service"
 alias aptU="sudo apt update && sudo apt upgrade"
 
 ## tmux aliases 
-
 alias tn="tmux -u new -s"
 alias ta="tmux attach-session -t"
 alias tkill="tmux kill-session -t"
@@ -213,7 +217,6 @@ eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
 source <(fzf --zsh) # Set up fzf key bindings and fuzzy completion
 
-# Add any additional configurations here
 
 export PATH=/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
@@ -226,4 +229,9 @@ fi
 clear
 ./launch_tmux.sh
 
+# Depriciated aliases && settings
+
+# alias windows="cd /media/deekshith/0804797804796998/Users/Deekshith"
+
+# Add any additional configurations here
 
