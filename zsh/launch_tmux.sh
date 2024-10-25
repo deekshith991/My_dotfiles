@@ -1,7 +1,7 @@
 #!/bin/zsh
 
 # Define an array with elements
-elements=("acer" "work" "plan")
+elements=("ACER" "D" )
 
 # Check if the script is running inside a tmux session
 if [[ -n "$TMUX" ]]; then
