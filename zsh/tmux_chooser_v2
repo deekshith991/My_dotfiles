@@ -1,0 +1,67 @@
+#!/usr/bin/bash
+# shellcheck disable=SC2207
+
+# Custom handling for Ctrl+C
+function ctrl_c() {
+  echo -e "\rType 'nil' to exit to the normal prompt."
+}
+
+trap ctrl_c SIGINT
+
+# Get the list of tmux session names
+output=($(tmux list-sessions -F "#{session_name}" 2>/dev/null))
+no_of_terminals=${#output[@]}
+
+# Check if there are any sessions
+if [[ $no_of_terminals -eq 0 ]]; then
+  echo "No active tmux sessions found."
+else
+  echo "Choose the terminal to attach to:"
+  k=1
+  for i in "${output[@]}"; do
+    echo "$k - $i"
+    ((k++))
+  done
+  echo
+fi
+
+# Provide options to the user
+echo "Options:"
+echo "1. Enter a session number to attach to an existing session."
+echo "2. Type a name to create a new session."
+echo "3. Enter 'nil' to exit."
+echo
+
+# Countdown timer
+timeout=30
+input=""
+
+# Display countdown timer and wait for input
+while ((timeout > 0)); do
+  # Display the prompt with countdown timer
+  echo -ne "\rYour choice (auto-exit in $timeout seconds): "
+  read -t 1 -n 1 input && break
+  ((timeout--))
+done
+
+# If no input was provided in time, treat as "nil"
+if [[ -z $input ]]; then
+  input="nil"
+  echo -e "\nNo input received. Exiting."
+fi
+
+# Process user input
+if [[ $input == 'nil' ]]; then
+  echo "Exiting."
+  exit 1
+elif [[ $input =~ ^[0-9]+$ ]] && ((input <= no_of_terminals)); then
+  terminal_name="${output[input - 1]}"
+  tmux attach -t "$terminal_name"
+elif [[ $input =~ ^[a-zA-Z0-9_-]+$ ]]; then
+  tmux new-session -s "$input"
+else
+  echo "Invalid session name. Use only alphanumeric characters, underscores, or hyphens."
+  exit 1
+fi
+
+exit 0

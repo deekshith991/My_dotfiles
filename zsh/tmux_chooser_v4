@@ -1,0 +1,100 @@
+#!/usr/bin/bash
+# shellcheck disable=SC2207
+
+# Custom handling for Ctrl+C
+function ctrl_c() {
+  echo -e "\nType 'nil' to exit to the normal prompt."
+}
+
+trap ctrl_c SIGINT
+
+# Custom handling for Ctrl+X
+function ctrl_x() {
+  echo -e "\nCtrl+X pressed. Exiting."
+  exit 1
+}
+
+# Bind Ctrl+X to the abort function
+trap ctrl_x SIGQUIT
+
+# Predefined list of session names and their corresponding directories
+declare -A session_dirs=(
+  ["dev"]="/path/to/dev"
+  ["test"]="/path/to/test"
+  ["prod"]="/path/to/prod"
+  ["backup"]="/path/to/backup"
+)
+
+predefined_sessions=("dev" "test" "prod" "backup")
+
+# Get the list of tmux session names
+output=($(tmux list-sessions -F "#{session_name}" 2>/dev/null))
+no_of_terminals=${#output[@]}
+
+# Display options to the user
+echo -e "\n\033[1;32m✨ Available tmux Sessions ✨\033[0m"
+echo "──────────────────────────────────────────"
+
+if [[ $no_of_terminals -gt 0 ]]; then
+  # Display existing sessions if available
+  k=1
+  for session in "${output[@]}"; do
+    echo -e "  \033[1;34m$k\033[0m - $session"
+    ((k++))
+  done
+  echo -e "──────────────────────────────────────────"
+else
+  echo "No active tmux sessions found."
+fi
+
+# Display predefined sessions for new session creation
+echo -e "\n\033[1;32m✨ Predefined Workspaces ✨\033[0m"
+echo "──────────────────────────────────────────"
+k=1
+for name in "${predefined_sessions[@]}"; do
+  echo -e "  \033[1;34m$((no_of_terminals + k))\033[0m - $name"
+  ((k++))
+done
+echo -e "──────────────────────────────────────────"
+echo -e "Options:"
+echo -e "  \033[1;34m1\033[0m. Enter a session number to attach to an existing session."
+echo -e "  \033[1;34m2\033[0m. Select a predefined workspace number to create and open a new session."
+echo -e "  \033[1;34m3\033[0m. Type a custom name to create a new session."
+echo -e "  \033[1;34m4\033[0m. Enter 'q' to exit.\n"
+
+# Prompt for input on a separate line
+echo -ne "\033[1;33mYour choice:\033[0m "
+read -r input
+
+# Process user input
+if [[ $input == "q" || $input == "nil" ]]; then
+  echo "Exiting."
+  exit 1
+elif [[ $input =~ ^[0-9]+$ ]]; then
+  if ((input > 0 && input <= no_of_terminals)); then
+    # Attach to an existing session
+    terminal_name="${output[input - 1]}"
+    tmux attach -t "$terminal_name"
+  elif ((input > no_of_terminals && input <= (no_of_terminals + ${#predefined_sessions[@]}))); then
+    # Create a new session with a predefined name and directory
+    session_name="${predefined_sessions[input - no_of_terminals - 1]}"
+    session_dir="${session_dirs[$session_name]}"
+    if [[ -d $session_dir ]]; then
+      tmux new-session -s "$session_name" -c "$session_dir"
+    else
+      echo "Directory $session_dir does not exist. Opening in home directory."
+      tmux new-session -s "$session_name" -c "$HOME"
+    fi
+  else
+    echo "Invalid choice. Exiting."
+    exit 1
+  fi
+elif [[ $input =~ ^[a-zA-Z0-9_-]+$ ]]; then
+  # Treat input as a custom session name
+  tmux new-session -s "$input" -c "$HOME"
+else
+  echo "Invalid input. Exiting."
+  exit 1
+fi
+
+exit 0
