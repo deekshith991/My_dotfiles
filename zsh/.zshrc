@@ -192,7 +192,7 @@ alias edit-zsh="nvim ~/.zshrc"
 
 ## neovim
 alias nv="nvim"
-alias n="nvim -u $PWD/.vimrc"
+alias v="nvim -u ~/.vimrc"
 
 ## alacritty
 
@@ -227,7 +227,9 @@ fi
 # Running commands
 
 clear
-./launch_tmux.sh
+if [[ ! -v TMUX && $TERM_PROGRAM != "vscode" ]]; then
+	~/tmux_chooser && exit
+fi
 
 # Depriciated aliases && settings
 
