@@ -78,6 +78,41 @@ install_brave() {
   fi
 }
 
+# Function to install Bruno
+install_bruno() {
+  log "Preparing to install Bruno from the custom repository..."
+  read -p "Do you want to proceed with the installation of Bruno? (y/n): " confirm_bruno
+  echo # Add an empty line for better readability
+  if [[ "$confirm_bruno" != "y" ]]; then
+    log "Bruno installation aborted."
+    return
+  fi
+
+  log "Installing dirmngr to manage GPG key connections..."
+  sudo apt install -y dirmngr # Ensure dirmngr is installed
+
+  log "Creating directory for APT keyrings..."
+  sudo mkdir -p /etc/apt/keyrings
+
+  log "Downloading and adding Bruno GPG key..."
+  sudo gpg --no-default-keyring --keyring /etc/apt/keyrings/bruno.gpg --keyserver keyserver.ubuntu.com --recv-keys 56333D3B745C1FEC # Correct key
+
+  log "Adding Bruno repository to sources list..."
+  echo "deb [signed-by=/etc/apt/keyrings/bruno.gpg] http://debian.usebruno.com/ bruno stable" | sudo tee /etc/apt/sources.list.d/bruno.list
+
+  log "Updating package lists..."
+  sudo apt update
+
+  if dpkg -l | grep -q "bruno"; then
+    log "Bruno is already installed."
+  else
+    echo # Empty line before installation message
+    log "Installing \033[1;32mBruno\033[0m..."
+    sudo apt install -y bruno || log "Failed to install Bruno."
+    echo -e "\n\033[1;32mBruno installed successfully!\033[0m\n" # Success message
+  fi
+}
+
 # Function to check if Nix is installed
 check_nix() {
   command -v nix-env &>/dev/null
@@ -157,6 +192,7 @@ apt_packages=(
 
 install_apt_packages "${apt_packages[@]}"
 install_brave
+# install_bruno
 
 if check_nix; then
   log "Nix is installed. Currently installed Nix packages will be listed:"
