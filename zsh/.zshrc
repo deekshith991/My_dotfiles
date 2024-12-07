@@ -196,10 +196,12 @@ alias v="nvim -u ~/.vimrc"
 
 ## alacritty
 
+alias lG="lazygit"
+
 ## service aliases 
-alias mongo-stop="systemctl stop mongod.service"
-alias mongo-start="systemctl start mongod.service"
-alias mongo-status="systemctl status mongod.service"
+alias stop-mongo="systemctl stop mongod.service"
+alias start-mongo="systemctl start mongod.service"
+alias mongost="systemctl status mongod.service"
 
 alias aptU="sudo apt update && sudo apt upgrade"
 

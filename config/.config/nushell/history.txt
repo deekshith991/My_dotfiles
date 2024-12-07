@@ -1,0 +1,56 @@
+l
+ls
+2
+pwd
+ls -la
+cd dotfiles/
+ls
+cd config/
+l
+ls -la
+cd .config/
+ll
+ls -la
+l
+nv env.nu
+nvim env.nu
+config nu
+$env.config = {<\n>  ...<\n>  show_banner: false,<\n>  ...<\n>}
+$env.config = {<\n>  show_banner: false<\n>}
+config nu
+$env.config = show_banner = false;
+$env.config = {show_banner = false;}
+$env.EDITOR = nvim
+$env.EDITOR = "nvim";
+v
+l
+cd dotfiles/
+cd config/.config/nushell/
+l
+ls
+nv env.nu
+nvim env.nu
+nvim config.nu
+reload
+watch
+watch --help
+cd
+cd dotfiles/config/.config/nushell/
+l
+code config.nu
+history
+age -d hgjh
+reload
+source ~/.config/nushell/
+source ~/.config/nushell/config.nu
+http post http:0.0.0.0:4444/
+cat test.html | http post http:0.0.0.0:4444/
+cat test.html | http post http://0.0.0.0:4444/
+cat test.html | http post http://127.0.0.1:4444/
+cat test.html | http post http://127.0.0.1:4444
+http get http://localhost:4444
+cat test.html | http post http://127.0.0.1:8000
+{email:"klsnskln"} | http post http://127.0.0.1:8000
+{"email":"klsnskln"} | http post http://127.0.0.1:8000
+{"email":"klsnskln"}| jq  | http post http://127.0.0.1:8000
+mysql -u root -p

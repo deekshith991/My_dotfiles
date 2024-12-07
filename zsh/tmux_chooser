@@ -19,7 +19,7 @@ trap ctrl_x SIGQUIT
 
 # Predefined list of session names and their corresponding directories
 declare -A session_dirs=(
-  ["job_portal"]="/home/deekshith/deekshith/github/job_portal_1"
+  ["job_portal"]="/home/deekshith/deekshith/github/final/"
   ["learning"]="/home/deekshith/deekshith/github/learning"
   ["github"]="/home/deekshith/deekshith/github"
   ["dev"]="/path/to/dev"
