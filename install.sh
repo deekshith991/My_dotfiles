@@ -207,6 +207,7 @@ if check_nix; then
     age
     portal
     atac
+    nushell
   )
 
   install_nix_packages "${nix_packages[@]}"
