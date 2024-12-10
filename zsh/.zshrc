@@ -185,7 +185,9 @@ alias cd..="cd ../../"
 alias cd...="cd ../../../"
 alias cd....="cd ../../../../"
 
+## tools
 alias cat="batcat"
+alias ytdl="/opt/yt-download/YoutubeDownloader"
 
 alias reload-zsh="source ~/.zshrc"
 alias edit-zsh="nvim ~/.zshrc"
