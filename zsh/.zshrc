@@ -176,7 +176,7 @@ toggle_proxy() {
 }
 
 # aliasing
-alias ls="eza"
+alias ls="eza --icons"
 alias l="ls"
 alias ll="ls -la"
 
