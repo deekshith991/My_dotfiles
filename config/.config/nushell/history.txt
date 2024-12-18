@@ -54,3 +54,10 @@ cat test.html | http post http://127.0.0.1:8000
 {"email":"klsnskln"} | http post http://127.0.0.1:8000
 {"email":"klsnskln"}| jq  | http post http://127.0.0.1:8000
 mysql -u root -p
+l
+ls
+cd
+l
+cd `deekshith/E4_SEM1/Bio medical /`
+ls
+ls -la | sort 

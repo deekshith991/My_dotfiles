@@ -176,6 +176,7 @@ toggle_proxy() {
 }
 
 # aliasing
+alias ls="eza"
 alias l="ls"
 alias ll="ls -la"
 
@@ -187,6 +188,7 @@ alias cd....="cd ../../../../"
 
 ## tools
 alias cat="batcat"
+alias help="tldr"
 alias ytdl="/opt/yt-download/YoutubeDownloader"
 
 alias reload-zsh="source ~/.zshrc"
