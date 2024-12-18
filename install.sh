@@ -188,6 +188,9 @@ apt_packages=(
   python3
   ubuntu-restricted-extras
   kdeconnect
+  eza
+  tldr
+  neovim
 )
 
 install_apt_packages "${apt_packages[@]}"
@@ -208,6 +211,8 @@ if check_nix; then
     portal
     atac
     nushell
+    zellij
+    yazi
   )
 
   install_nix_packages "${nix_packages[@]}"
