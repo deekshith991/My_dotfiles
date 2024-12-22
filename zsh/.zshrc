@@ -19,7 +19,7 @@ setopt HIST_IGNORE_ALL_DUPS
 #
 
 # Set editor default keymap to emacs (`-e`) or vi (`-v`)
-bindkey -e
+bindkey -v
 
 # Prompt for spelling correction of commands.
 #setopt CORRECT
@@ -133,20 +133,15 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
+# ---------------------------- Personal settings --------------------------------------
 
 
 
+# ---------------------------- proxy ----------------------
 
-
-
-
-## trying proxy set up 
-
-# Proxy variables
 PROXY_ON=false
 PROXY_URL="http://staffnet.rgukt.ac.in:3128"
 
-# # Function to toggle proxy on
 proxy_on() {
   export http_proxy=$PROXY_URL
   export https_proxy=$PROXY_URL
@@ -156,7 +151,6 @@ proxy_on() {
   echo "Proxy is now ON"
 }
 
-# # Function to toggle proxy off
 proxy_off() {
   unset http_proxy
   unset https_proxy
@@ -166,7 +160,6 @@ proxy_off() {
   echo "Proxy is now OFF"
 }
 
-# # Function to toggle proxy state
 toggle_proxy() {
   if [ "$PROXY_ON" = false ]; then
     proxy_on
@@ -175,7 +168,7 @@ toggle_proxy() {
   fi
 }
 
-# aliasing
+# ------------------------- aliasing ---------------------------
 alias ls="eza --icons"
 alias l="ls"
 alias ll="ls -la"
@@ -198,7 +191,6 @@ alias edit-zsh="nvim ~/.zshrc"
 alias nv="nvim"
 alias v="nvim -u ~/.vimrc"
 
-## alacritty
 
 alias lG="lazygit"
 
@@ -217,12 +209,12 @@ alias twkill="tmux kill-window -t"
 alias tls="tmux ls"
 
 
-# sourcing
+# -------------------------- sourcing --------------------------------
+
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
 source <(fzf --zsh) # Set up fzf key bindings and fuzzy completion
-
 
 export PATH=/run/current-system/sw/bin:$HOME/.nix-profile/bin:$PATH
 if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
@@ -230,16 +222,16 @@ if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
 fi
 
 
-# Running commands
+# --------------------- Running commands ----------------------------
 
 clear
 if [[ ! -v TMUX && $TERM_PROGRAM != "vscode" ]]; then
 	~/tmux_chooser && exit
 fi
 
-# Depriciated aliases && settings
+# ------------------------------ Depriciated ------------------------------
 
 # alias windows="cd /media/deekshith/0804797804796998/Users/Deekshith"
 
-# Add any additional configurations here
+# ---------------- Add any additional configurations here ------------------
 
