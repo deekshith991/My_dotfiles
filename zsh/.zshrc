@@ -187,11 +187,6 @@ alias ytdl="/opt/yt-download/YoutubeDownloader"
 alias reload-zsh="source ~/.zshrc"
 alias edit-zsh="nvim ~/.zshrc"
 
-## neovim
-alias nv="nvim"
-alias v="nvim -u ~/.vimrc"
-
-
 alias lG="lazygit"
 
 ## service aliases 
@@ -207,6 +202,28 @@ alias ta="tmux attach-session -t"
 alias tkill="tmux kill-session -t"
 alias twkill="tmux kill-window -t"
 alias tls="tmux ls"
+
+# -------------------------- neovim -----------------------------
+
+alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
+alias nvim-astro="NVIM_APPNAME=AstroNvim nvim"
+alias nv="NVIM_APPNAME=my-default-nvim nvim"
+alias v="NVIM_APPNAME=default nvim"
+
+function nvims() {
+  items=("default" "my-default-nvim" "LazyVim" "bare" "AstroNvim")
+  config=$(printf "%s\n" "${items[@]}" | fzf --prompt=" Neovim Config  " --height=~50% --layout=reverse --border --exit-0)
+  if [[ -z $config ]]; then
+    echo "Nothing selected"
+    return 0
+  elif [[ $config == "default" ]]; then
+    config=""
+  fi
+  NVIM_APPNAME=$config nvim $@
+}
+
+bindkey -s ^a "nvims\n"
+
 
 
 # -------------------------- sourcing --------------------------------
