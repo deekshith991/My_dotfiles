@@ -222,7 +222,7 @@ function nvims() {
   NVIM_APPNAME=$config nvim $@
 }
 
-bindkey -s ^a "nvims\n"
+# bindkey -s ^n "nvims\n"
 
 
 
