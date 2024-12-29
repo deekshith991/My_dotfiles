@@ -203,6 +203,8 @@ alias tkill="tmux kill-session -t"
 alias twkill="tmux kill-window -t"
 alias tls="tmux ls"
 
+alias gt="cd github"
+
 # -------------------------- neovim -----------------------------
 
 alias nvim-lazy="NVIM_APPNAME=LazyVim nvim"
