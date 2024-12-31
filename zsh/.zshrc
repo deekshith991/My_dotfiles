@@ -245,9 +245,9 @@ fi
 # --------------------- Running commands ----------------------------
 
 clear
-if [[ ! -v TMUX && $TERM_PROGRAM != "vscode" ]]; then
-	~/tmux_chooser && exit
-fi
+# if [[ ! -v TMUX && $TERM_PROGRAM != "vscode" ]]; then
+# 	~/tmux_chooser && exit
+# fi
 
 # ------------------------------ Depriciated ------------------------------
 
