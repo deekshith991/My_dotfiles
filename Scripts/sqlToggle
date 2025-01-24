@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# Define colors
+GREEN="\033[32m"
+RED="\033[31m"
+YELLOW="\033[33m"
+RESET="\033[0m"
+
+# Function to display messages with colored status
+display_message_with_status() {
+  local message=$1
+  local status=$2
+  local color=$3
+  echo -e "${message}${color}${status}${RESET}"
+}
+
+# Function to check MySQL status
+check_mysql_status() {
+  systemctl is-active --quiet mysql
+  return $?
+}
+
+# Function to print MySQL status
+print_mysql_status() {
+  if check_mysql_status; then
+    display_message_with_status "MySQL is " "running" "$GREEN"
+  else
+    display_message_with_status "MySQL is " "stopped" "$RED"
+  fi
+}
+
+# Function to toggle MySQL state
+toggle_mysql_state() {
+  if check_mysql_status; then
+    display_message_with_status "MySQL is " "running" "$GREEN"
+    display_message_with_status "Stopping MySQL... " "" "$YELLOW"
+    sudo systemctl stop mysql
+  else
+    display_message_with_status "MySQL is " "stopped" "$RED"
+    display_message_with_status "Starting MySQL... " "" "$YELLOW"
+    sudo systemctl start mysql
+  fi
+}
+
+# Main function to manage MySQL service
+manage_mysql() {
+  toggle_mysql_state
+  print_mysql_status
+}
+
+# Execute the main function
+manage_mysql

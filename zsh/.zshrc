@@ -231,6 +231,7 @@ function nvims() {
 
 # -------------------------- sourcing --------------------------------
 
+export PATH="$PATH:/home/deekshith/dotfiles/Scripts"
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 eval "$(zoxide init zsh)"
