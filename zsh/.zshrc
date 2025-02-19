@@ -183,6 +183,7 @@ alias cd....="cd ../../../../"
 alias cat="batcat"
 alias help="tldr"
 alias ytdl="/opt/yt-download/YoutubeDownloader"
+$EDITOR = nvim
 
 alias reload-zsh="source ~/.zshrc"
 alias edit-zsh="nvim ~/.zshrc"
@@ -256,3 +257,6 @@ clear
 
 # ---------------- Add any additional configurations here ------------------
 
+alias lzd='lazydocker'
+
+. "$HOME/.local/bin/env"
