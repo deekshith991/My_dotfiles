@@ -1,10 +1,9 @@
-
 import argparse
 import os
 import subprocess
 
 # Parse command-line arguments
-parser = argparse.ArgumentParser(description="Git Committer Script")
+parser = argparse.ArgumentParser(description="Git drive Script")
 parser.add_argument("--dir", required=True, help="Directory location of the repository")
 args = parser.parse_args()
 
@@ -16,6 +15,18 @@ git_dir = os.path.join(REPO, ".git")
 if os.path.isdir(git_dir):
     print(f"Repository directory set to: {REPO}")
     print("Git repository detected.")
+    
+    # Check for unpushed commits before adding new files
+    try:
+        status_output = subprocess.check_output(["git", "status", "-uno"], cwd=REPO, text=True)
+        if "Your branch is ahead" in status_output:
+            print("Unpushed commits detected. Pushing to remote...")
+            subprocess.run(["git", "push"], cwd=REPO, check=True)
+            print("All unpushed commits have been pushed.")
+        else:
+            print("No unpushed commits found.")
+    except subprocess.CalledProcessError as e:
+        print(f"Error checking/pushing commits: {e}")
     
     # Read .gitignore file if it exists
     gitignore_path = os.path.join(REPO, ".gitignore")
